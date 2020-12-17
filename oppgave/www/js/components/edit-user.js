@@ -9,39 +9,40 @@ class EditUser extends LitElement {
 
   render() {
     return html`
-    <head>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    </head>
-    <form onsubmit="javascript: return false;" id="userForm" method="POST">
-    <div class="form-group pt-3 ml-5" style="width: 20rem;">
-      <label for="email">Email</label>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="email" class="col-sm-2 control-label">email</label>
       <input class="form-control" id="uname" name="uname" type="text" value="${this.user.uname}" required>
       <input type="hidden" id="uid" name="uid" value="${this.user.uid}">
     </div>
-    <div class="form-group pt-1 ml-5" style="width: 20rem;">
-      <label for="firstName">First Name</label>
+
+    <div class="form-group pt-1 ml-5" style="width: 20rem">
+      <label for="firstName">FirstName</label>
       <input class="form-control" id="firstName" name="firstName" type="text" value="${this.user.firstName}" required>
     </div>
+
     <div class="form-group pt-1 ml-5" style="width: 20rem;">
       <label for="lastName">Last Name</label>
-      <input class="form-control" id="lastName" name="lastName" type="text" value="${this.user.lastName}" required>
+      <input class="form-control" id="lastName" placeholder = "navn" name="lastName" type="text" value="${this.user.lastName}" required>
     </div>
+
     <div class="form-group pt-1 ml-5" style="width: 20rem;">
-      <label for="oldpwd">Old Password</label>
-      <input type="password" class="form-control" id="oldpwd" name="oldpwd" type="text" value="">
+      <label for="old password">Old Password</label>
+      <input type="password" class="form-control" id="oldpwd" name="oldpwd" placeholder="123-45-678" type="text" value="">
     </div>
+
     <div class="form-group pt-1 ml-5" style="width: 20rem;">
-      <label for="newpwd">New Password</label>
+      <label for="new password">New Password</label>
       <input type="password" class="form-control" id="pwd" name="pwd" type="text" value="">
   </div>
-  <input type="submit" @click=${this.updateUser} id="submitForm" name="editUser" class="btn btn-info mt-4 ml-2" value="Edit User"></input>
+  <input type="submit" @click=${this.UserUpdate} id="submitForm" name="editUser" class="btn btn-info mt-4 ml-2" value="Edit User"></input>
 </form>
     `;
   }
 
-  //updates the information about a user
-  updateUser(e) {
-    //data from the HTML form
+  //Function to update user data 
+  UserUpdate(e) {
+    //data from the the form
     const dataForm = new FormData(e.target.form);
     console.log(e)
     fetch('api/updateUser.php', {
